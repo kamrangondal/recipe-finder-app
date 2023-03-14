@@ -20,13 +20,17 @@ import WidgetsIcon from '@mui/icons-material/Widgets';
 import GrassIcon from '@mui/icons-material/Grass';
 import SetMealIcon from '@mui/icons-material/SetMeal';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import Divider from '@mui/material/Divider';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-
+import { recipes } from './recipes';
 
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 
 import Sheet from '@mui/joy/Sheet';
+import { useState } from 'react';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -80,10 +84,100 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
 export default function SearchAppBar() {
 
   const [open, setOpen] = React.useState(false);
+  const [selectedId, setSelectedId] = useState(0);
+  const [search, setSearch] = useState('');
   
+  function handleSearchChange(e) {
+    setSearch(e.target.value);
+  }
+  
+  const filteredRecipes = recipes.filter(recipe => {
+    return recipe.name.toLowerCase().includes(search.toLowerCase());
+  });
+
+  
+  const listItems = filteredRecipes.map(recipes =>
+    <Grid item xs={12} sm={6} md={4} lg={3} key={recipes.id+' main cards'}>
+
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea onClick={() => { setOpen(true); setSelectedId(recipes.id) }}>
+          <CardMedia
+            component="img"
+            height="180"
+            image={recipes.img}
+            alt={recipes.name}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {recipes.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Behold! Click me to get recipe about mouth watering {recipes.name}...
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button size="small" color="primary">
+            Watch Tutorial
+          </Button>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+
+    </Grid>
+  );
+
+  const modalValues = recipes.map(recipes => {
+    if (recipes.id === selectedId) {
+      return (
+        <Card sx={{ maxWidth: '50vw', maxHeight: '75vh', overflow: 'auto' }} key={recipes.id+' modal cards'}>
+          <CardMedia
+            component="img"
+            height="180"
+            image={recipes.img}
+            alt={recipes.name}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {recipes.name}
+            </Typography>
+            <Typography gutterBottom variant="h8" component="div">
+              Ingredients
+            </Typography>
+            <ul>
+              {recipes.ingredients.map((ingredient) => (
+                <li key={ingredient+ ' ingredients'}>{ingredient}</li>
+              ))}
+            </ul>
+            <Typography gutterBottom variant="h8" component="div">
+              Instructions
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {recipes.instructions}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small" color="primary">
+              Watch Tutorial
+            </Button>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+          </CardActions>
+        </Card>
+      )
+
+    } else {
+      return null;
+    }
+  });
+
   return (
     <Box sx={{ flexGrow: 1, }}>
       <AppBar position="static"
@@ -93,76 +187,37 @@ export default function SearchAppBar() {
         }}
       >
 
-
-
-      <Modal
-        aria-labelledby="modal-title"
-        aria-describedby="modal-desc"
-        open={open}
-        onClose={() => setOpen(false)}
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      >
-        <Sheet
-          variant="outlined"
-          sx={{
-            maxWidth: 500,
-            borderRadius: 'md',
-            p: 3,
-            boxShadow: 'lg',
-          }}
+        <Modal
+          aria-labelledby="modal-title"
+          aria-describedby="modal-desc"
+          open={open}
+          onClose={() => setOpen(false)}
+          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
-          <ModalClose
+          <Sheet
             variant="outlined"
             sx={{
-              top: 'calc(-1/4 * var(--IconButton-size))',
-              right: 'calc(-1/4 * var(--IconButton-size))',
-              boxShadow: '0 2px 12px 0 rgba(0 0 0 / 0.2)',
-              borderRadius: '50%',
-              bgcolor: 'background.body',
+              maxWidth: 500,
+              borderRadius: 'md',
+              p: 3,
+              boxShadow: 'lg',
             }}
-          />
-          {/* <Typography
-            component="h2"
-            id="modal-title"
-            level="h4"
-            textColor="inherit"
-            fontWeight="lg"
-            mb={1}
           >
-            This is the modal title
-          </Typography>
-          <Typography id="modal-desc" textColor="text.tertiary">
-            Make sure to use <code>aria-labelledby</code> on the modal dialog with an
-            optional <code>aria-describedby</code> attribute.
-          </Typography> */}
-          <Card sx={{ maxWidth: 345 }}>
-                  <CardActionArea onClick={() => setOpen(true)}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="/ffg.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        Biryani
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                      Behold! An authentic Chicken Biryani recipe with simple, easy-to-follow instructions (no curveballs!) and mouthwatering, traditional Pakistani and Indian flavor. This recipe includes tips on how to get fluffy rice, tender chicken, and the distinct biryani taste. Tested to perfection!
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                    Watch Tutorial
-                    </Button>
-                    <IconButton aria-label="add to favorites">
-                      <FavoriteIcon />
-                    </IconButton>
-                  </CardActions>
-                </Card>
-        </Sheet>
-      </Modal>
+            <ModalClose
+              variant="outlined"
+              sx={{
+                top: 'calc(-1/4 * var(--IconButton-size))',
+                right: 'calc(-1/4 * var(--IconButton-size))',
+                boxShadow: '0 2px 12px 0 rgba(0 0 0 / 0.2)',
+                borderRadius: '50%',
+                bgcolor: 'background.body',
+              }}
+            />
+
+            {modalValues}
+
+          </Sheet>
+        </Modal>
 
 
         <Toolbar>
@@ -192,7 +247,7 @@ export default function SearchAppBar() {
           >
             Recipe Finder Application
           </Typography>
-          <Search>
+          <Search onChange={handleSearchChange}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -208,15 +263,6 @@ export default function SearchAppBar() {
       <br />
 
 
-      {/* <section style={{paddingLeft: '20px', paddingRight: '20px'}}>
-
-        <Box>
-          <Typography variant="h4" component="div" gutterBottom>
-            Welcome to Recipes Bank
-          </Typography>
-        </Box>
-      </section> */}
-
       <Grid container spacing={2}>
         <Grid item xs={4} sm={3}>
           <Stack spacing={2}>
@@ -231,193 +277,8 @@ export default function SearchAppBar() {
 
             <Grid container spacing={2}>
 
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardActionArea onClick={() => setOpen(true)}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="/ffg.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        Biryani
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Behold! An authentic Chicken Biryani recipe...
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      Watch Tutorial
-                    </Button>
-                    <IconButton aria-label="add to favorites">
-                      <FavoriteIcon />
-                    </IconButton>
-                  </CardActions>
-                </Card>
-
-              </Grid>
-
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardActionArea onClick={() => setOpen(true)}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="/ffg.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        Biryani
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Behold! An authentic Chicken Biryani recipe...
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                    Watch Tutorial
-                    </Button>
-                    <IconButton aria-label="add to favorites">
-                      <FavoriteIcon />
-                    </IconButton>
-                  </CardActions>
-                </Card>
-
-              </Grid>
-
-
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardActionArea onClick={() => setOpen(true)}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="/ffg.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        Biryani
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Behold! An authentic Chicken Biryani recipe...
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                    Watch Tutorial
-                    </Button>
-                    <IconButton aria-label="add to favorites">
-                      <FavoriteIcon />
-                    </IconButton>
-                  </CardActions>
-                </Card>
-
-              </Grid>
-
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardActionArea onClick={() => setOpen(true)}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="/ffg.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        Biryani
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Behold! An authentic Chicken Biryani recipe...
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                    Watch Tutorial
-                    </Button>
-                    <IconButton aria-label="add to favorites">
-                      <FavoriteIcon />
-                    </IconButton>
-                  </CardActions>
-                </Card>
-
-              </Grid>
-
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardActionArea onClick={() => setOpen(true)}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="/ffg.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        Biryani
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Behold! An authentic Chicken Biryani recipe...
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                    Watch Tutorial
-                    </Button>
-                    <IconButton aria-label="add to favorites">
-                      <FavoriteIcon />
-                    </IconButton>
-                  </CardActions>
-
-                </Card>
-
-              </Grid>
-
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardActionArea onClick={() => setOpen(true)}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="/ffg.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        Biryani
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Behold! An authentic Chicken Biryani recipe...
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      Watch Tutorial
-                    </Button>
-                    <IconButton aria-label="add to favorites">
-                      <FavoriteIcon />
-                    </IconButton>
-                  </CardActions>
-                </Card>
-
-              </Grid>
+              {listItems}
+              {/* {filteredRecipes} */}
 
             </Grid>
 
@@ -425,7 +286,58 @@ export default function SearchAppBar() {
         </Grid>
       </Grid>
 
+      <Divider sx={{ my: 3 }} />
+
+      <Grid container spacing={2}>
+        <Grid item sm={6} md={8} lg={8}>
+          <Item>
+            <Typography variant="h6" gutterBottom component="div">
+              About
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              This is a demo app. It is a simple recipe app
+              that allows users to search for recipes and view them.
+            </Typography>
+          </Item>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={4} lg={4}>
+          <Item>
+            &copy; 2023 Recipe app by
+            <strong> Kamran Saif</strong>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              <IconButton
+                aria-label="delete"
+                size="large"
+                target="_blank"
+                href="https://github.com/kamrangondal"
+
+              >
+                <GitHubIcon />
+              </IconButton >
+              <IconButton
+                aria-label="delete"
+                size="large"
+                target="_blank"
+                href="https://www.linkedin.com/in/kamran-saif/"
+
+              >
+                <LinkedInIcon />
+              </IconButton >
+            </Box>
+          </Item>
+
+        </Grid>
+      </Grid>
+
+      <br></br>
     </Box>
+
 
   );
 }

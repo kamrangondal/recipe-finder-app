@@ -8,7 +8,14 @@ export const recipes = [{
         '1 tablespoon white sugar',
         '1 1/4 cups milk',
         '1 egg',
-        '3 tablespoons butter, melted'
+        '3 tablespoons butter, melted',
+        '2 cups all-purpose flour',
+        '3 1/2 teaspoons baking powder',
+        '1 teaspoon salt',
+        '1 tablespoon white sugar',
+        '1 1/4 cups milk',
+        '1 egg',
+        '3 tablespoons butter, melted',
     ],
     instructions: [
         'In a large bowl, sift together the flour, baking powder, salt and sugar. Make a well in the center and pour in the milk, egg and melted butter; mix until smooth.',
@@ -68,7 +75,7 @@ export const recipes = [{
         'In a medium bowl, beat the eggs, milk, salt and pepper. Set aside.',
         'In a medium skillet, melt butter over medium heat. Pour in the eggs and scramble until cooked through. Serve hot.'
     ],
-    img: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Scrambled_eggs.jpg'
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Scrambed_eggs.jpg/1200px-Scrambed_eggs.jpg'
 }, {
     id: 5,
     name: 'Bacon and Eggs',
@@ -82,7 +89,7 @@ export const recipes = [{
         'In a large skillet, cook bacon over medium high heat until evenly brown. Drain, crumble and set aside.',
         'In the same skillet, fry eggs in the bacon drippings until desired doneness. Season with salt and pepper. Serve eggs topped with crumbled bacon.'
     ],
-    img: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Bacon_and_eggs.jpg'
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Bacon%26egg_pie.jpg/1200px-Bacon%26egg_pie.jpg'
 }, {
     id: 6,
     name: 'Hash Browns',
@@ -106,7 +113,7 @@ export const recipes = [{
         'In a large bowl, mix together the potatoes, onion, cheese, salt, pepper and dried herbs. Form into patties.',
         'Heat a lightly oiled skillet over medium high heat. Cook patties until golden brown on both sides.'
     ],
-    img: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Hash_browns.jpg'
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Mmm..._sliders_and_deep_fried_hash_browns_%287958927842%29.jpg/1200px-Mmm..._sliders_and_deep_fried_hash_browns_%287958927842%29.jpg'
 }, {
     id: 7,
     name: 'Fried Rice',
@@ -121,7 +128,7 @@ export const recipes = [{
     instructions: [
         'In a large skillet, saute the onion, celery and green pepper in oil until tender. Add the rice, peas and carrots, ham and soy sauce. Cook and stir until heated through.'
     ],
-    img: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Fried_rice.jpg'
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Koh_Mak%2C_Thailand%2C_Fried_rice_with_seafood%2C_Thai_fried_rice.jpg/1200px-Koh_Mak%2C_Thailand%2C_Fried_rice_with_seafood%2C_Thai_fried_rice.jpg'
 }, {
     id: 8,
     name: 'Eggs Benedict',
@@ -178,7 +185,7 @@ export const recipes = [{
         'Place the English muffins in the prepared baking dish. In a small bowl, mix together the eggs, butter, lemon juice, water, sugar, salt and spices. Pour over the muffins.',
         'Bake in the preheated oven for 20 to 25 minutes, or until the eggs are set.'
     ],
-    img: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Eggs_benedict.jpg'
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Traditional_Eggs_Benedict.jpg/1200px-Traditional_Eggs_Benedict.jpg'
 }
 
 
