@@ -8,14 +8,7 @@ export const recipes = [{
         '1 tablespoon white sugar',
         '1 1/4 cups milk',
         '1 egg',
-        '3 tablespoons butter, melted',
-        '2 cups all-purpose flour',
-        '3 1/2 teaspoons baking powder',
-        '1 teaspoon salt',
-        '1 tablespoon white sugar',
-        '1 1/4 cups milk',
-        '1 egg',
-        '3 tablespoons butter, melted',
+        '3 tablespoons butter, melted'
     ],
     instructions: [
         'In a large bowl, sift together the flour, baking powder, salt and sugar. Make a well in the center and pour in the milk, egg and melted butter; mix until smooth.',
@@ -175,7 +168,6 @@ export const recipes = [{
         '1/4 teaspoon ground celery seed',
         '1/4 teaspoon ground cayenne pepper',
         '1/4 teaspoon ground white pepper',
-        '1/4 teaspoon ground black pepper',
         '1/4 teaspoon ground red pepper',
         '1/4 teaspoon ground green pepper',
         '1/4 teaspoon ground yellow pepper',
