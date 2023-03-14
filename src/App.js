@@ -139,7 +139,7 @@ export default function SearchAppBar() {
         <Card sx={{ maxWidth: '50vw', maxHeight: '75vh', overflow: 'auto' }} key={recipes.id+' modal cards'}>
           <CardMedia
             component="img"
-            height="400"
+            height="200"
             image={recipes.img}
             alt={recipes.name}
           />
