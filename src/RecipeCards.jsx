@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import "./App.css";
 import Grid from "@mui/material/Grid";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { alertClasses, Button, CardActionArea, CardActions } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -75,7 +75,7 @@ export default function RecipeCards({ filteredRecipes }) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={() => alert("Look for yourself on youtube.")}>
             Watch Tutorial
           </Button>     
           <IconButton aria-label="add to favorites" onClick={() => {
@@ -125,7 +125,7 @@ export default function RecipeCards({ filteredRecipes }) {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" color="primary">
+            <Button size="small" color="primary"  onClick={() => alert("Look for yourself on youtube.")}>
               Watch Tutorial
             </Button>
           </CardActions>

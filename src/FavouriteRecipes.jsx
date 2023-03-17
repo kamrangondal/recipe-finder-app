@@ -70,7 +70,7 @@ export default function FavouriteRecipes() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary"  onClick={() => alert("Look for yourself on youtube.")}>
             Watch Tutorial
           </Button>
           <IconButton aria-label="Delete from favorites" onClick={() => handleDeleteRecipe(recipes)} >
@@ -124,7 +124,7 @@ export default function FavouriteRecipes() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" color="primary">
+            <Button size="small" color="primary"  onClick={() => alert("Look for yourself on youtube.")}>
               Watch Tutorial
             </Button>
           </CardActions>
